@@ -1,0 +1,50 @@
+<%@page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        
+        <title>jQuery UI</title>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="http://www.urimalo.com/assets/admin/plugins/bootstrap-datepicker/css/datepicker.css">
+        <script>
+        $(function(){
+        	$("#from_date").datepicker({
+        	    format: 'yyyy-mm-dd',
+        	    autoclose: true,
+        	}).on('changeDate', function (selected) {
+        	    var startDate = new Date(selected.date.valueOf());
+        	    $('#to_date').datepicker('setStartDate', startDate);
+        	}).on('clearDate', function (selected) {
+        	    $('#to_date').datepicker('setStartDate', null);
+        	});
+
+        	$("#to_date").datepicker({
+        	    format: 'yyyy-mm-dd',
+        	    autoclose: true,
+        	}).on('changeDate', function (selected) {
+        	    var endDate = new Date(selected.date.valueOf());
+        	    $('#from_date').datepicker('setEndDate', endDate);
+        	}).on('clearDate', function (selected) {
+        	    $('#from_date').datepicker('setEndDate', null);
+        	});
+        	});
+        </script>
+    </head>
+    <body>
+       
+		<div class="row">
+			<div class="col-xs-6">
+				<label class="control-label" for="fromDate">Check in: </label>
+				<input type="text" class="form-control" id="from_date" placeholder="Select start date" contenteditable="false">
+			</div>
+			<div class="col-xs-6">
+				<label class="control-label" for="toDate">Check out: </label>
+				<input type="text" class="form-control" id="to_date" placeholder="Select end date" contenteditable="false">
+			</div>
+		</div>
+
+    </body>
+</html>

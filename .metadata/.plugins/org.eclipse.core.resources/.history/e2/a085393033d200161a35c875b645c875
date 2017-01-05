@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bootstrap datepicker examples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 부트스트랩 -->
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  
+<!-- 한글화 및 한국식 날짜표기를 적용한 datepicker 구성요소-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.3.2/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/bt-datepicker/css/datepicker.css">
+<script type="text/javascript" src="${contextPath}/resources/bt-datepicker/js/bootstrap-datepicker.js" />
+
+</head>
+<script type="text/javascript">
+
+	var nowTemp = new Date();
+	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+	var checkin = $('#dpd1').datepicker({
+		onRender : function(date) {
+			return date.valueOf() < now.valueOf() ? 'disabled' : '';
+		}
+	}).on('changeDate', function(ev) {
+		if (ev.date.valueOf() > checkout.date.valueOf()) {
+			var newDate = new Date(ev.date)
+			newDate.setDate(newDate.getDate() + 1);
+			checkout.setValue(newDate);
+		}
+		checkin.hide();
+		$('#dpd2')[0].focus();
+	}).data('datepicker');
+	var checkout = $('#dpd2').datepicker({
+		onRender : function(date) {
+			return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+		}
+	}).on('changeDate', function(ev) {
+		checkout.hide();
+	}).data('datepicker');
+</script>
+<body>
+	<div class="well">
+		<div class="row">
+			<div class="col-xs-6">
+				<label class="control-label" for="dpd1">Check in: </label>
+				<input type="text" class="form-control"  id="dpd1" />
+			</div>
+			<div class="col-xs-6">
+				<label class="control-label" for="dpd2">Check out: </label>
+				<input type="text" class="form-control" id="dpd2" />
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

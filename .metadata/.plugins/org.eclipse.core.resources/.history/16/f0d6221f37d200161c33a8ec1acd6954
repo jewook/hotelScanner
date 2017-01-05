@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bootstrap datepicker examples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 부트스트랩 -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.3.2/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/bt-datepicker/css/datepicker.css">
+<script type="text/javascript" src="${contextPath}/resources/bt-datepicker/js/bootstrap-datepicker.js" ></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $.datepicker.regional['ko'] = {
+        closeText: '닫기',
+        prevText: '이전달',
+        nextText: '다음달',
+        currentText: '오늘',
+        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+        '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+        monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+        '7월','8월','9월','10월','11월','12월'],
+        dayNames: ['일','월','화','수','목','금','토'],
+        dayNamesShort: ['일','월','화','수','목','금','토'],
+        dayNamesMin: ['일','월','화','수','목','금','토'],
+        weekHeader: 'Wk',
+        dateFormat: 'yy-mm-dd',
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: true,
+        yearSuffix: '',
+        showOn: 'both',
+        buttonText: "달력",
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        yearRange: 'c-99:c+99',
+    };
+    $.datepicker.setDefaults($.datepicker.regional['ko']);
+ 
+    $('#sdate').datepicker();
+    $('#sdate').datepicker("option", "maxDate", $("#edate").val());
+    $('#sdate').datepicker("option", "onClose", function ( selectedDate ) {
+        $("#edate").datepicker( "option", "minDate", selectedDate );
+    });
+ 
+    $('#edate').datepicker();
+    $('#edate').datepicker("option", "minDate", $("#sdate").val());
+    $('#edate').datepicker("option", "onClose", function ( selectedDate ) {
+        $("#sdate").datepicker( "option", "maxDate", selectedDate );
+    });
+});
+</script>
+</head>
+<body>
+	<div class="well">
+		<div class="row">
+			<div class="col-xs-6">
+				<label class="control-label" for="dpd1">Check in: </label>
+				<input type="text" class="form-control"  id="sdate" />
+			</div>
+			<div class="col-xs-6">
+				<label class="control-label" for="dpd2">Check out: </label>
+				<input type="text" class="form-control" type="text" id="edate" />
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

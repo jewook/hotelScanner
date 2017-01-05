@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bootstrap datepicker examples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="/hotelScanner/resources/bt-datepicker/css/datepicker.css">
+<script src="/hotelScanner/resources/bt-datepicker/js/bootstrap-datepicker.js"></script>
+
+</head>
+<body>
+	<div class="row">
+		<div class="modal-alerts"></div>
+		<div id="datepicker" role="form" class="form-horizontal"></div>
+		<label for="from" class="col-sm-1 control-label">Date</label>
+		<div class="col-sm-2">
+			<input id="date" type="text" name="date"
+				class="input-date form-control" />
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$('#datepicker .input-date').datepicker({
+		format : 'yyyy-mm-dd',
+		endDate : 'today',
+		todayHighlight : true
+	}).on('changeDate', function(e) {
+		return get_url_and_refresh_link();
+	});
+
+	$('#datepicker .input-date').datepicker('setDate', 'today');
+</script>
+</html>

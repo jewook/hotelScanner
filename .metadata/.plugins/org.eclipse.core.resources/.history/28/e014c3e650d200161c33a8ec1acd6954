@@ -1,0 +1,60 @@
+<%@page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        
+        <title>jQuery UI</title>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.css" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="http://www.urimalo.com/assets/admin/plugins/bootstrap-datepicker/css/datepicker.css">
+		<link src="http://www.urimalo.com/assets/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" ></script>
+        <script>
+        $(function(){
+        	var startDate = new Date();
+        	var FromEndDate = new Date();
+        	var ToEndDate = new Date();
+
+        	ToEndDate.setDate(ToEndDate.getDate()+365);
+
+        	$('#from_date').datepicker({
+        	    weekStart: 1,
+        	    startDate: '01/01/2012',
+        	    endDate: FromEndDate, 
+        	    autoclose: true
+        	}).on('changeDate', function(selected){
+        	        startDate = new Date(selected.date.valueOf());
+        	        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+        	        $('#to_date').datepicker('setStartDate', startDate);
+        	        $('#to_date').focus();
+        	    }); 
+        	$('#to_date').datepicker({
+        	        weekStart: 1,
+        	        startDate: startDate,
+        	        endDate: ToEndDate,
+        	        autoclose: true
+        	    })
+        	    .on('changeDate', function(selected){
+        	        FromEndDate = new Date(selected.date.valueOf());
+        	        FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+        	        $('#from_date').datepicker('setEndDate', FromEndDate);
+        	    });
+        	});
+        </script>
+    </head>
+    <body>
+       
+		<div class="row">
+			<div class="col-xs-6">
+				<label class="control-label" for="fromDate">Check in: </label>
+				<input type="text" class="form-control" id="from_date" placeholder="Select start date" contenteditable="false">
+			</div>
+			<div class="col-xs-6">
+				<label class="control-label" for="toDate">Check out: </label>
+				<input type="text" class="form-control" id="to_date" placeholder="Select end date" contenteditable="false">
+			</div>
+		</div>
+
+    </body>
+</html>
